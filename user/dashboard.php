@@ -1,6 +1,5 @@
 <?php include 'header.php'; ?>
 <style>
-    /* General Reset */
     * {
         margin: 0;
         padding: 0;
@@ -8,11 +7,12 @@
         font-family: Arial, sans-serif;
     }
 
-    /* Main Layout */
+    /* Layout Umum */
     body {
         display: flex;
         min-height: 100vh;
-        background-color: #f4f6f9;
+        background-color: #f5f5f5;
+        /* Warna latar belakang */
     }
 
     .dashboard {
@@ -20,12 +20,26 @@
         width: 100%;
     }
 
-    /* Main Content */
     .main-content {
         flex: 1;
         padding: 20px;
     }
 
+    /* Gambar Banner atau Header */
+    .banner {
+        width: 100%;
+        height: 300px;
+        /* Sesuaikan dengan ukuran banner */
+        background-image: url('../kurma-media.png');
+        /* Ganti dengan path gambar banner */
+        background-size: cover;
+        background-position: center;
+        border-radius: 8px;
+        margin-bottom: 30px;
+        /* Memberi jarak antara banner dan produk */
+    }
+
+    /* Header */
     header {
         display: flex;
         justify-content: space-between;
@@ -35,119 +49,82 @@
 
     header h2 {
         font-size: 24px;
-        color: #333;
+        color: #455a64;
     }
 
     header h2 span {
         font-size: 16px;
-        color: #666;
+        color: #78909c;
         margin-left: 10px;
     }
 
-    .logout-btn {
-        text-decoration: none;
-        color: white;
-        background-color: #1b5e20;
-        padding: 10px 15px;
-        border-radius: 5px;
-        transition: background-color 0.3s ease, transform 0.2s ease;
-        /* Menambahkan efek transisi */
-        font-weight: bold;
-        /* Menebalkan teks */
-    }
-
-    .logout-btn:hover {
-        background-color: #1b9e40;
-        /* Mengubah warna saat hover */
-        transform: scale(1.05);
-        /* Sedikit memperbesar tombol saat hover */
-    }
-
-    /* Stats Cards */
+    /* Kartu Produk */
     .stats-grid {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        /* Tiga kolom */
-        gap: 15px;
-        /* Jarak antar kartu */
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
         margin-bottom: 20px;
     }
 
     .card {
-        background-color: #e3f2fd;
-        /* Warna latar belakang untuk kartu */
-        padding: 20px;
+        background-color: #ffffff;
+        padding: 15px;
         border-radius: 8px;
-        position: relative;
-        color: #333;
         text-align: center;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        transition: transform 0.2s ease;
-        /* Transisi saat hover */
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s ease, box-shadow 0.3s ease;
+        position: relative;
     }
 
     .card:hover {
-        transform: scale(1.05);
-        /* Memperbesar kartu saat hover */
+        transform: translateY(-5px);
+        box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+    }
+
+    .card img {
+        width: 100%;
+        height: 150px;
+        object-fit: contain;
+        margin-bottom: 10px;
     }
 
     .card h3 {
-        font-size: 24px;
-        margin-bottom: 5px;
+        font-size: 16px;
+        margin: 10px 0;
+        color: #37474f;
     }
 
     .card p {
         font-size: 14px;
-        color: #555;
-    }
-
-    .card .card-icon {
-        font-size: 36px;
-        color: #777;
+        color: #546e7a;
         margin-bottom: 10px;
     }
 
-    /* Color Variants */
-    .green {
-        background-color: #c8e6c9;
-    }
-
-    .orange {
-        background-color: #ffe0b2;
-    }
-
-    .blue {
-        background-color: #bbdefb;
-    }
-
-    /* Charts */
-    .charts-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 20px;
-    }
-
-    .chart {
-        background-color: white;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    .chart h3 {
-        font-size: 18px;
-        margin-bottom: 10px;
-        color: #333;
-    }
-
-    .chart-placeholder {
-        height: 200px;
-        background-color: #e0e0e0;
+    /* Tombol Ambil */
+    .ambil-btn {
+        display: inline-block;
+        padding: 8px 15px;
+        background-color: #28a745;
+        /* Warna hijau untuk tombol */
+        color: #ffffff;
+        border-radius: 4px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: background-color 0.3s ease, transform 0.2s ease;
         display: flex;
-        align-items: center;
         justify-content: center;
-        color: #666;
-        font-size: 14px;
+        align-items: center;
+    }
+
+    .ambil-btn i {
+        margin-right: 5px;
+        /* Jarak antara ikon dan teks */
+    }
+
+    .ambil-btn:hover {
+        background-color: #218838;
+        /* Warna hijau lebih gelap saat hover */
+        transform: scale(1.05);
     }
 </style>
 
@@ -155,32 +132,32 @@
     <header>
         <h2>User<span>Control Panel</span></h2>
     </header>
-
     <!-- ruang kreasi developer -->
     <section class="stats-grid">
 
-        <div class="card blue">
-            <div class="card-icon"><i class="fas fa-car-side"></i></div>
-            <h3><?php  ?></h3>
-            <p>Jajan Masuk Hari Ini</p>
+        <?php foreach(getNamaProduk() as $product) : ?> 
+        <div class="card">
+            <img src="../coki.png" alt="<?php echo $product['nama_produk'] ?>">
+            <h3><?php echo $product['nama_produk'] ?></h3>
+            <!-- <p>Jajanan Manis dengan Gula Halus</p> -->
+            <a href="transaksi_keluar.php" class="ambil-btn"><i class="fa fa-plus"></i> Ambil</a>
         </div>
+        <?php endforeach; ?>
+
+    </section>
+    <!-- ruang kreasi developer -->
+    <section class="stats-grid">
 
         <div class="card orange">
             <div class="card-icon"><i class="fas fa-car"></i></div>
             <h3><?php ?></h3>
-            <p>Kendaraan Masuk Tahun Ini</p>
-        </div>
-
-        <div class="card orange">
-            <div class="card-icon"><i class="fas fa-dollar-sign"></i></div>
-            <h3>Rp <?php ?></h3>
-            <p>Pemasukan Tahun Ini</p>
+            <p>Total Jajan Minggu Ini</p>
         </div>
 
         <div class="card green">
             <div class="card-icon"><i class="fas fa-dollar-sign"></i></div>
             <h3>Rp <?php ?></h3>
-            <p>Total Pemasukan</p>
+            <p>Total Harga Jajanan</p>
         </div>
     </section>
 </div>
