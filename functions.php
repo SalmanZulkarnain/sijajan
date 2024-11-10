@@ -109,3 +109,9 @@ function transaksiKeluar()
         return "Produk tidak ditemukan di transaksi masuk.";
     }
 }
+
+function tambahProduk()
+{
+    $nama_produk = $_POST['nama_produk'];
+    
+}

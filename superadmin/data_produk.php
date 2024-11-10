@@ -9,7 +9,7 @@
         <div class="header">
             <h1>Daftar Produk</h1>
             <div class="button">
-                <a href="tambah_kendaraan.php"><button>+ Tambah</button></a>
+                <a href="tambah_produk.php"><button>+ Tambah</button></a>
             </div>
         </div>
 
