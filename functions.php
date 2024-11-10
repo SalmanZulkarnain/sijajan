@@ -17,7 +17,8 @@ function getListProduct()
     return $data;
 }
 
-function getListBarangKeluar() {
+function getListBarangKeluar()
+{
     global $db;
 
     $sql = "SELECT sijajan_transaksi_keluar.*, sijajan_produk.nama_produk, sijajan_user.nama
@@ -36,7 +37,8 @@ function getListBarangKeluar() {
     return $data;
 }
 
-function getListBarangMasuk() {
+function getListBarangMasuk()
+{
     global $db;
 
     $sql = "SELECT sijajan_transaksi_masuk.*, sijajan_produk.nama_produk, sijajan_user.nama
@@ -78,7 +80,7 @@ function transaksiKeluar()
     $id_produk = $_POST['id_produk'];
     $jumlah_ambil = $_POST['jumlah_ambil'];
     $tanggal_keluar = $_POST['tanggal_keluar'];
-    
+
     $message = "";
 
     $sql_select = "SELECT jumlah FROM sijajan_transaksi_masuk WHERE id_produk = '$id_produk'";
@@ -107,5 +109,42 @@ function transaksiKeluar()
         }
     } else {
         return "Produk tidak ditemukan di transaksi masuk.";
+    }
+}
+
+function tambahProduk($nama_produk, $gambar, $barcode, $kode_produk)
+{
+    global $db;
+
+    // Cek apakah ada file yang diupload
+    if (isset($gambar) && $gambar['error'] == 0) {
+        // Tentukan direktori untuk menyimpan gambar
+        $target_dir = "./uploads/";
+        $target_file = $target_dir . basename($gambar["name"]);
+        $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+
+        // Validasi format gambar
+        $allowed_types = ["jpg", "jpeg", "png", "gif"];
+        if (in_array($imageFileType, $allowed_types)) {
+            // Pindahkan file gambar yang diupload ke direktori yang ditentukan
+            if (move_uploaded_file($gambar["tmp_name"], $target_file)) {
+                // Simpan data ke database
+                $query = "INSERT INTO sijajan_produk (nama_produk, gambar_produk, barcode, kode_produk) VALUES (?, ?, ?, ?)";
+                $stmt = $db->prepare($query);
+                $stmt->bind_param("ssss", $nama_produk, $target_file, $barcode, $kode_produk);
+
+                if ($stmt->execute()) {
+                    return ["status" => "success", "message" => "Produk berhasil ditambahkan"];
+                } else {
+                    return ["status" => "error", "message" => "Gagal menyimpan data produk"];
+                }
+            } else {
+                return ["status" => "error", "message" => "Gagal mengupload gambar"];
+            }
+        } else {
+            return ["status" => "error", "message" => "Format file tidak didukung"];
+        }
+    } else {
+        return ["status" => "error", "message" => "Tidak ada gambar yang diupload"];
     }
 }

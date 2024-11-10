@@ -1,14 +1,12 @@
 <?php include 'header.php'; ?>
 
 <link rel="stylesheet" href="../assets/CSS/data_produk.css">
-<link rel="stylesheet" href="../assets/CSS/style.css" type="text/css">
 
-<body>
 <div class="main-content">
     <!-- ruang kreasi developer -->
     <div class="container">
         <div class="header">
-            <h1>Produk Keluar</h1>
+            <h1>Produk Masuk</h1>
             <div class="button">
                 <a href="tambah_kendaraan.php"><button>+ Tambah</button></a>
             </div>

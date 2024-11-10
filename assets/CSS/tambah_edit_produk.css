@@ -1,0 +1,83 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f9f9fc;
+}
+
+.form-tambah-edit-container {
+    width: 100%;
+    max-width: 450px;
+    padding: 25px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+h2 {
+    text-align: center;
+    color: #333333;
+    margin-bottom: 20px;
+}
+
+.form-tambah-edit-group {
+    margin-bottom: 15px;
+}
+
+.form-tambah-edit-group label {
+    display: block;
+    margin-bottom: 6px;
+    color: #333333;
+    font-weight: bold;
+}
+
+.form-tambah-edit-group input[type="text"],
+.form-tambah-edit-group input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+.form-tambah-edit-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.form-tambah-edit-button {
+    flex: 1;
+    padding: 8px;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+}
+
+.form-tambah-edit-button.simpan {
+    background-color: #5cb85c;
+    color: white;
+}
+
+.form-tambah-edit-button.simpan:hover {
+    background-color: #4cae4c;
+}
+
+.form-tambah-edit-button.batal {
+    background-color: #d9534f;
+    color: white;
+}
+
+.form-tambah-edit-button.batal:hover {
+    background-color: #c9302c;
+}

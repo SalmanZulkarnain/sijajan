@@ -8,7 +8,7 @@
     <section class="stats-grid">
 
         <div class="card blue">
-            <div class="card-icon"><i class="fas fa-car-side"></i></div>
+            <div class="card-icon"><i class="fa-solid fa-cookie"></i></div>
             <h3><?php  ?></h3>
             <p>Jajan Masuk Hari Ini</p>
         </div>

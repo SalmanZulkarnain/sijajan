@@ -1,7 +1,6 @@
 <?php include 'header.php'; ?>
 
 <link rel="stylesheet" href="../assets/CSS/data_produk.css">
-<link rel="stylesheet" href="../assets/CSS/style.css" type="text/css">
 
 <body>
 <div class="main-content">

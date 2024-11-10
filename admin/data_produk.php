@@ -1,7 +1,6 @@
 <?php include 'header.php'; ?>
 
 <link rel="stylesheet" href="../assets/CSS/data_produk.css">
-<link rel="stylesheet" href="../assets/CSS/style.css" type="text/css">
 
 <div class="main-content">
     <!-- ruang kreasi developer -->
@@ -9,7 +8,7 @@
         <div class="header">
             <h1>Daftar Produk</h1>
             <div class="button">
-                <a href="tambah_kendaraan.php"><button>+ Tambah</button></a>
+                <a href="tambah_produk.php"><button>+ Tambah</button></a>
             </div>
         </div>
 
