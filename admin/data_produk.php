@@ -1,4 +1,7 @@
-<?php include 'header.php'; ?>
+<?php 
+include 'header.php'; 
+hapusProduk();
+?>
 
 <link rel="stylesheet" href="../assets/CSS/data_produk.css">
 
@@ -33,8 +36,8 @@
                     <td><?php echo $product['barcode']; ?></td>
                     <td><?php echo $product['kode_produk']; ?></td>
                     <td>
-                        <a href="#">Edit</a> |
-                        <a href="#">Hapus</a>
+                        <a href="edit_produk.php?id=<?php echo $product['id']; ?>">Edit</a> |
+                        <a href="data_produk.php?id=<?php echo $product['id']; ?>" onclick="return confirm('Yakin hapus produk ini?')">Hapus</a>
                     </td>
                 </tr>
                     <?php $no++; endforeach; ?>

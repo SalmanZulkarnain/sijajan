@@ -148,3 +148,83 @@ function tambahProduk($nama_produk, $gambar, $barcode, $kode_produk)
         return ["status" => "error", "message" => "Tidak ada gambar yang diupload"];
     }
 }
+
+function hapusProduk() {
+    global $db; 
+
+    if(isset($_GET['id'])) {
+        $get_id = $_GET['id'];
+
+        $sql = "DELETE FROM sijajan_produk WHERE id='$get_id'";
+        $eksekusi = $db->query($sql);
+
+        if($eksekusi) {
+            header('Location: data_produk.php');
+            exit;
+        }
+    }
+}
+
+function getProdukById() {
+    global $db;
+
+    $data = array();
+    if (isset($_GET['id'])) {
+        $get_id = $_GET['id'];
+        $sql = "SELECT * FROM sijajan_produk WHERE id = '$get_id'";
+        $eksekusi = $db->query($sql);
+
+        if ($eksekusi && $eksekusi->num_rows > 0) {
+            $data = $eksekusi->fetch_assoc();
+        }
+    }
+    return $data;
+}
+
+function updateProduk($nama_produk, $gambar, $barcode, $kode_produk, $id)
+{
+    global $db;
+
+    // Ambil path gambar lama dari database jika tidak ada gambar baru
+    $query = "SELECT gambar_produk FROM sijajan_produk WHERE id = ?";
+    $stmt = $db->prepare($query);
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result()->fetch_assoc();
+    $gambar_lama = $result['gambar_produk'];
+
+    // Tentukan direktori untuk menyimpan gambar
+    $target_dir = "./uploads/";
+    $target_file = $target_dir . basename($gambar["name"]);
+    $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+    $allowed_types = ["jpg", "jpeg", "png", "gif"];
+
+    // Jika ada gambar baru yang diunggah, gunakan gambar baru
+    if (isset($gambar) && $gambar['error'] == 0 && in_array($imageFileType, $allowed_types)) {
+        if (move_uploaded_file($gambar["tmp_name"], $target_file)) {
+            // Ganti gambar lama dengan gambar baru
+            $gambar_produk = $target_file;
+
+            // Hapus gambar lama jika ada dan bukan gambar default
+            if ($gambar_lama && file_exists($gambar_lama)) {
+                unlink($gambar_lama);
+            }
+        } else {
+            return ["status" => "error", "message" => "Gagal mengupload gambar"];
+        }
+    } else {
+        // Jika tidak ada gambar baru, gunakan gambar lama
+        $gambar_produk = $gambar_lama;
+    }
+
+    // Simpan data ke database
+    $query = "UPDATE sijajan_produk SET nama_produk=?, gambar_produk=?, barcode=?, kode_produk=? WHERE id=?";
+    $stmt = $db->prepare($query);
+    $stmt->bind_param("ssssi", $nama_produk, $gambar_produk, $barcode, $kode_produk, $id);
+
+    if ($stmt->execute()) {
+        return ["status" => "success", "message" => "Produk berhasil diupdate"];
+    } else {
+        return ["status" => "error", "message" => "Gagal menyimpan data produk"];
+    }
+}
