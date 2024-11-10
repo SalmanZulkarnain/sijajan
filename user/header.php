@@ -33,10 +33,9 @@ if (!isset($_SESSION['id_user']) || !isset($_SESSION['log-in']) || $_SESSION['le
         <nav class="nav-menu">
             <a href="dashboard.php"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
             <a href="transaksi_keluar.php"><i class="fas fa-dollar-sign"></i> Jajan</a>
-            <a href="#"><i class="fa-solid fa-user"></i> Profil</a>
-            <a href="#"><i class="fas fa-file-alt"></i> Laporan Jajan </a>
+            <a href="#"><i class="fas fa-file-alt"></i> Laporan Jajan</a>
         </nav>
 
         <p><?php echo "Selamat datang, " . $_SESSION['email'] . "!";  ?></p>
-        <a href="../logout.php" onclick="return confirm('yakin ingin keluar??')"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        <a href="../logout.php" onclick="return confirm('yakin ingin keluar??')" class="logout-button"><i class="fas fa-sign-out-alt"></i> Logout</a>
     </header>

@@ -36,6 +36,25 @@ function getListBarangKeluar() {
     return $data;
 }
 
+function getListBarangMasuk() {
+    global $db;
+
+    $sql = "SELECT sijajan_transaksi_masuk.*, sijajan_produk.nama_produk, sijajan_user.nama
+            FROM sijajan_transaksi_masuk
+            LEFT JOIN sijajan_produk ON sijajan_transaksi_masuk.id_produk = sijajan_produk.id
+            LEFT JOIN sijajan_user ON sijajan_transaksi_masuk.id_user = sijajan_user.id
+            WHERE sijajan_user.level_user = 'admin'";
+
+    $eksekusi = $db->query($sql);
+
+    $data = array();
+    while ($row = $eksekusi->fetch_assoc()) {
+        $data[] = $row;
+    }
+
+    return $data;
+}
+
 function getNamaProduk()
 {
     global $db;
