@@ -228,3 +228,18 @@ function updateProduk($nama_produk, $gambar, $barcode, $kode_produk, $id)
         return ["status" => "error", "message" => "Gagal menyimpan data produk"];
     }
 }
+
+function get_all_users() {
+    global $db;
+    $sql = "SELECT * FROM sijajan_user";
+    $result = $db->query($sql);
+
+    $users = [];
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $users[] = $row;
+        }
+    }
+
+    return $users;
+}

@@ -35,7 +35,7 @@ if (!isset($_SESSION['id_user']) || !isset($_SESSION['log-in']) || $_SESSION['le
             <a href="data_produk.php"><i class="fa-solid fa-box"></i></i> Daftar Produk</a>
             <a href="data_masuk.php"><i class="fa-solid fa-arrow-down"></i> Produk Masuk</a>
             <a href="data_keluar.php"><i class="fa-solid fa-arrow-up"></i> Produk Keluar</a>
-            <a href="data_keluar.php"><i class="fa-solid fa-arrow-up"></i> Data Pengguna</a>
+            <a href="halaman_profil.php"><i class="fa-solid fa-arrow-up"></i> Data Pengguna</a>
             <a href="#"><i class="fas fa-file-alt"></i> Laporan Jajan</a>
         </nav>
 

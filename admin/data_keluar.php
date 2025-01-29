@@ -8,9 +8,6 @@
     <div class="container">
         <div class="header">
             <h1>Produk Keluar</h1>
-            <div class="button">
-                <a href="tambah_kendaraan.php"><button>+ Tambah</button></a>
-            </div>
         </div>
 
         <table id="produk">

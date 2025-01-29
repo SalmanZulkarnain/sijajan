@@ -21,5 +21,22 @@ footer {
 <footer class="footer-content">
     <span>&copy; 2024 - Sistem Informasi Jajan - Version 2.4.0</span>
 </footer>
+<script src="../assets/js/jquery-3.7.1.min.js"></script>
+    <script src="../assets/js/DataTables/datatables.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#produk').DataTable({
+                responsive: true,
+                paging: true,
+                lengthChange: true,
+                searching: true,
+                ordering: true,
+                info: true,
+                autoWidth: false,
+                pageLength: 10
+            });
+        });
+    </script>
 </body>
 </html>
